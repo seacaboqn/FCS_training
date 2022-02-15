@@ -29,6 +29,11 @@ export default function MyApp(props) {
                 {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
                 <CssBaseline />
                 <Component {...pageProps} />
+                <style jsx global>{`
+                    body {
+                        background: rgb(245, 245, 245);
+                    }
+                `}</style>
             </ThemeProvider>
         </CacheProvider>
     );
