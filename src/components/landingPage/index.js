@@ -19,7 +19,7 @@ const LandingPage = () => {
     };
     return (
         <>
-            <WrappedContainer id="section-1">
+            <WrappedContainer id="section-1" maxWidth={false}>
                 <LandingPageWrapper>
                     <Grettings variant="h2" component="h1">
                         Welcome to{' '}
