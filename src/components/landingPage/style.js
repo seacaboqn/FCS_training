@@ -1,12 +1,12 @@
 import styled from '@emotion/styled';
 import { Typography } from '@mui/material';
-import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
 
-export const ServiceName = styled.span`
+export const ServiceName = styled.div`
     color: #1e88e5;
 `;
 
-export const LandingPageWrapper = styled.div`
+export const LandingPageWrapper = styled(Box)`
     flex-direction: column;
     display: flex;
     justify-content: center;
@@ -38,7 +38,7 @@ export const Description = styled(Typography)`
     margin-bottom: 10px;
 `;
 
-export const Background = styled.div`
+export const Background = styled(Box)`
     left: 0px;
     width: 100%;
     bottom: 0px;
@@ -47,6 +47,7 @@ export const Background = styled.div`
     font-size: 0px;
 `;
 
-export const WrappedContainer = styled(Container)`
-    height: 100vh;
+export const WrappedContainer = styled(Box)`
+    height: 980px;
+    max-width: 100%;
 `;

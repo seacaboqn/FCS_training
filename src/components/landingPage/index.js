@@ -19,7 +19,11 @@ const LandingPage = () => {
     };
     return (
         <>
-            <WrappedContainer id="section-1" maxWidth={false}>
+            <WrappedContainer
+                id="section-1"
+                maxWidth={false}
+                style={{ position: 'relative' }}
+            >
                 <LandingPageWrapper>
                     <Grettings variant="h2" component="h1">
                         Welcome to{' '}
@@ -37,23 +41,22 @@ const LandingPage = () => {
                         checkout our registered partners
                     </Button>
                 </LandingPageWrapper>
+                <Background>
+                    <svg
+                        xmls="http://www.w3.org/2000/svg"
+                        viewBox="0 0 1903 556"
+                        style={{
+                            x: '0px',
+                            y: '0px'
+                        }}
+                    >
+                        <path
+                            fill="#525c69"
+                            d="M753.1,434.2c110.6,63.7,277.7,70.6,373.4,15.4L1905,0v555.9H0V0.2L753.1,434.2z"
+                        ></path>
+                    </svg>
+                </Background>
             </WrappedContainer>
-
-            <Background>
-                <svg
-                    xmls="http://www.w3.org/2000/svg"
-                    viewBox="0 0 1903 556"
-                    style={{
-                        x: '0px',
-                        y: '0px'
-                    }}
-                >
-                    <path
-                        fill="#525c69"
-                        d="M753.1,434.2c110.6,63.7,277.7,70.6,373.4,15.4L1905,0v555.9H0V0.2L753.1,434.2z"
-                    ></path>
-                </svg>
-            </Background>
         </>
     );
 };
