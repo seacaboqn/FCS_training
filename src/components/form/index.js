@@ -3,10 +3,17 @@ import { useForm } from 'react-hook-form';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { RoundAvatar } from './style';
+import { RoundAvatar, Title } from './style';
 import Image from 'next/image';
-import { Typography } from '@mui/material';
+import { InputAdornment, Typography } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
+import Button from '@mui/material/Button';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import WatchLaterIcon from '@mui/icons-material/WatchLater';
+import PersonIcon from '@mui/icons-material/Person';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+import EventNoteIcon from '@mui/icons-material/EventNote';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
@@ -35,18 +42,27 @@ const Form = () => {
             <Box>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Box>
-                        <Typography>1. Reservation</Typography>
+                        <Title>1. Reservation</Title>
                         <TextField
                             required
                             id="outlined-required"
                             label="Location"
                             defaultValue="Hello World"
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <LocationOnIcon />
+                                    </InputAdornment>
+                                )
+                            }}
+                            margin="normal"
                         />
                         <TextField
                             required
                             id="outlined-required"
-                            label="RequPaxired"
+                            label="Pax"
                             defaultValue="Hello World"
+                            margin="normal"
                         />
                         <TextField
                             required
@@ -54,22 +70,46 @@ const Form = () => {
                             label="Date Time"
                             placeholder="Pick Your Time"
                             fullWidth={true}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <WatchLaterIcon />
+                                    </InputAdornment>
+                                )
+                            }}
+                            margin="normal"
                         />
                     </Box>
 
                     <Box>
-                        <Typography>2. Infomation</Typography>
+                        <Title>2. Infomation</Title>
                         <TextField
                             required
                             id="outlined-required"
                             label="First Name"
                             placeholder="First Name"
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <PersonIcon />
+                                    </InputAdornment>
+                                )
+                            }}
+                            margin="normal"
                         />
                         <TextField
                             required
                             id="outlined-required"
                             label="Last Name"
                             placeholder="Last Name"
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <PersonIcon />
+                                    </InputAdornment>
+                                )
+                            }}
+                            margin="normal"
                         />
                         <TextField
                             required
@@ -77,6 +117,14 @@ const Form = () => {
                             label="Email"
                             placeholder="Email"
                             fullWidth={true}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <MailOutlineIcon />
+                                    </InputAdornment>
+                                )
+                            }}
+                            margin="normal"
                         />
                         <TextField
                             required
@@ -84,30 +132,53 @@ const Form = () => {
                             label="Phone"
                             placeholder="Phone"
                             fullWidth={true}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <LocalPhoneIcon />
+                                    </InputAdornment>
+                                )
+                            }}
+                            margin="normal"
                         />
                         <TextField
                             required
                             id="outlined-required"
                             label="Message"
                             fullWidth={true}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <EventNoteIcon />
+                                    </InputAdornment>
+                                )
+                            }}
+                            margin="normal"
                         />
+                        `
                     </Box>
 
-                    {/* register your input into the hook by invoking the "register" function */}
-                    <input defaultValue="test" {...register('example')} />
+                    {/*/!* register your input into the hook by invoking the "register" function *!/*/}
+                    {/*<input defaultValue="test" {...register('example')} />*/}
 
-                    {/* include validation with required or other standard HTML validation rules */}
-                    <input
-                        {...register('exampleRequired', { required: true })}
-                    />
-                    {/* errors will return when field validation fails  */}
-                    {errors.exampleRequired && (
-                        <span>This field is required</span>
-                    )}
+                    {/*/!* include validation with required or other standard HTML validation rules *!/*/}
+                    {/*<input*/}
+                    {/*    {...register('exampleRequired', { required: true })}*/}
+                    {/*/>*/}
+                    {/*/!* errors will return when field validation fails  *!/*/}
+                    {/*{errors.exampleRequired && (*/}
+                    {/*    <span>This field is required</span>*/}
+                    {/*)}*/}
 
                     <Checkbox {...label} />
 
-                    <input type="submit" />
+                    <Typography>
+                        I have read, agreed and understood the stated terms and
+                        conditions{' '}
+                    </Typography>
+                    <Button variant="contained" type="submit" fullWidth={true}>
+                        BOOK
+                    </Button>
                 </form>
             </Box>
         </Container>
