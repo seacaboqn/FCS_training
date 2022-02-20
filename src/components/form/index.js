@@ -170,7 +170,7 @@ const Form = () => {
                     {/*    <span>This field is required</span>*/}
                     {/*)}*/}
 
-                    <Checkbox {...label} />
+                    {/*<Checkbox {...label} />*/}
 
                     <Typography>
                         I have read, agreed and understood the stated terms and
