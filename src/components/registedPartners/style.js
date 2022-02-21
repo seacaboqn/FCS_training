@@ -22,7 +22,7 @@ export const SearchField = styled(Box)`
 
 export const GridContainer = styled(Box)`
     margin: 20px 0px;
-    height: 75vh;
+    height: 100vh;
     overflow: auto;
     background: white;
     padding: 24px;
