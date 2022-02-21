@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -13,10 +13,24 @@ import PersonIcon from '@mui/icons-material/Person';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import EventNoteIcon from '@mui/icons-material/EventNote';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
+
+import PhoneInput from 'react-phone-input-2';
+
+import 'react-phone-input-2/lib/material.css';
+
+import MuiPhoneNumber from 'material-ui-phone-number';
+
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
-const Form = () => {
+const Form = (props) => {
+    // const { value, defaultCountry, onChange, classes } = props;
+    const [enableButton, setEnableButton] = useState(false);
     const {
         register,
         handleSubmit,
@@ -26,6 +40,13 @@ const Form = () => {
     const onSubmit = (data) => console.log(data);
 
     console.log(watch('example')); // watch input value by passing the name of it
+
+    const ChecboxOnChangeHandler = () => {
+        setEnableButton((prev) => {
+            return !prev;
+        });
+        console.log(enableButton);
+    };
 
     return (
         /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
@@ -42,30 +63,52 @@ const Form = () => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Box>
                         <Title>1. Reservation</Title>
-                        <TextField
-                            required
-                            id="outlined-required"
-                            label="Location"
-                            InputProps={{
-                                startAdornment: (
-                                    <InputAdornment position="start">
-                                        <LocationOnIcon />
-                                    </InputAdornment>
-                                )
+                        <Box
+                            sx={{
+                                display: 'grid',
+                                gridTemplateColumns: { sm: '1fr 1fr' },
+                                gap: 2
                             }}
-                            margin="normal"
-                        />
+                        >
+                            <TextField
+                                id="outlined-required"
+                                label="Location * "
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <LocationOnIcon />
+                                        </InputAdornment>
+                                    )
+                                }}
+                                margin="normal"
+                                {...register('location', {
+                                    required: 'Location is required'
+                                })}
+                                error={!!errors.location}
+                                helperText={errors?.location?.message}
+                            />
+                            <TextField
+                                id="outlined-required"
+                                label="Pax *"
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <GroupAddIcon />
+                                        </InputAdornment>
+                                    )
+                                }}
+                                margin="normal"
+                                {...register('pax', {
+                                    required: 'Pax is required'
+                                })}
+                                error={!!errors.pax}
+                                helperText={errors?.pax?.message}
+                            />
+                        </Box>
                         <TextField
-                            required
-                            id="outlined-required"
-                            label="Pax"
-                            margin="normal"
-                        />
-                        <TextField
-                            required
                             id="outlined-required"
                             label="Date Time"
-                            placeholder="Pick Your Time"
+                            placeholder="Pick your time"
                             fullWidth={true}
                             InputProps={{
                                 startAdornment: (
@@ -75,43 +118,63 @@ const Form = () => {
                                 )
                             }}
                             margin="normal"
+                            {...register('datetime', {
+                                required:
+                                    'There are no available times! Please select another date'
+                            })}
+                            error={!!errors.datetime}
+                            helperText={errors?.datetime?.message}
                         />
                     </Box>
-
                     <Box>
                         <Title>2. Infomation</Title>
-                        <TextField
-                            required
-                            id="outlined-required"
-                            label="First Name"
-                            placeholder="First Name"
-                            InputProps={{
-                                startAdornment: (
-                                    <InputAdornment position="start">
-                                        <PersonIcon />
-                                    </InputAdornment>
-                                )
+                        <Box
+                            sx={{
+                                display: 'grid',
+                                gridTemplateColumns: { sm: '1fr 1fr' },
+                                gap: 2
                             }}
-                            margin="normal"
-                        />
+                        >
+                            <TextField
+                                id="outlined-required"
+                                label="First Name *"
+                                placeholder="First Name"
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <PersonIcon />
+                                        </InputAdornment>
+                                    )
+                                }}
+                                margin="normal"
+                                {...register('firstname', {
+                                    required: 'First Name is required'
+                                })}
+                                error={!!errors.firstname}
+                                helperText={errors?.firstname?.message}
+                            />
+                            <TextField
+                                id="outlined-required"
+                                label="Last Name *"
+                                placeholder="Last Name"
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <PersonIcon />
+                                        </InputAdornment>
+                                    )
+                                }}
+                                margin="normal"
+                                {...register('lastname', {
+                                    required: 'Last Name is required'
+                                })}
+                                error={!!errors.lastname}
+                                helperText={errors?.lastname?.message}
+                            />
+                        </Box>
                         <TextField
-                            required
                             id="outlined-required"
-                            label="Last Name"
-                            placeholder="Last Name"
-                            InputProps={{
-                                startAdornment: (
-                                    <InputAdornment position="start">
-                                        <PersonIcon />
-                                    </InputAdornment>
-                                )
-                            }}
-                            margin="normal"
-                        />
-                        <TextField
-                            required
-                            id="outlined-required"
-                            label="Email"
+                            label="Email *"
                             placeholder="Email"
                             fullWidth={true}
                             InputProps={{
@@ -122,11 +185,16 @@ const Form = () => {
                                 )
                             }}
                             margin="normal"
+                            {...register('email', {
+                                required: 'Email is required'
+                            })}
+                            error={!!errors.email}
+                            helperText={errors?.email?.message}
                         />
                         <TextField
-                            required
                             id="outlined-required"
                             label="Phone"
+                            type="number"
                             placeholder="Phone"
                             fullWidth={true}
                             InputProps={{
@@ -137,9 +205,13 @@ const Form = () => {
                                 )
                             }}
                             margin="normal"
+                            {...register('phone', {
+                                required: 'Phone is required'
+                            })}
+                            error={!!errors.phone}
+                            helperText={errors?.phone?.message}
                         />
                         <TextField
-                            required
                             id="outlined-required"
                             label="Message"
                             fullWidth={true}
@@ -151,31 +223,41 @@ const Form = () => {
                                 )
                             }}
                             margin="normal"
+                            {...register('message', { required: true })}
                         />
                     </Box>
-
-                    {/*/!* register your input into the hook by invoking the "register" function *!/*/}
-                    {/*<input defaultValue="test" {...register('example')} />*/}
-
-                    {/*/!* include validation with required or other standard HTML validation rules *!/*/}
-                    {/*<input*/}
-                    {/*    {...register('exampleRequired', { required: true })}*/}
-                    {/*/>*/}
-                    {/*/!* errors will return when field validation fails  *!/*/}
-                    {/*{errors.exampleRequired && (*/}
-                    {/*    <span>This field is required</span>*/}
-                    {/*)}*/}
-
+                    <PhoneInput
+                        country={'sg'}
+                        inputProps={{
+                            name: 'phone',
+                            required: true,
+                            autoFocus: true
+                        }}
+                        {...register('test')}
+                    />
                     <Confirm>
-                        <Checkbox {...label} />
+                        <Checkbox
+                            {...label}
+                            onChange={ChecboxOnChangeHandler}
+                        />
 
-                        <Typography>
+                        <Typography
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                justifyContent: 'center'
+                            }}
+                        >
                             I have read, agreed and understood the stated terms
                             and conditions{' '}
                         </Typography>
                     </Confirm>
-
-                    <Button variant="contained" type="submit" fullWidth={true}>
+                    <Button
+                        variant="contained"
+                        type="submit"
+                        fullWidth={true}
+                        disabled={!enableButton}
+                    >
                         BOOK
                     </Button>
                 </form>
