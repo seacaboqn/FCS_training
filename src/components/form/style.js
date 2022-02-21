@@ -9,4 +9,8 @@ export const RoundAvatar = styled(Image)`
 
 export const Title = styled(Typography)`
     font-weight: bold;
-`
+`;
+
+export const Confirm = styled(Box)`
+    display: flex;
+`;

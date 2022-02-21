@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
-import { Typography } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 
-export const ServiceName = styled.div`
+export const ServiceName = styled.span`
     color: #1e88e5;
 `;
 
@@ -47,7 +47,7 @@ export const Background = styled(Box)`
     font-size: 0px;
 `;
 
-export const WrappedContainer = styled(Box)`
+export const WrappedContainer = styled(Container)`
     height: 980px;
     max-width: 100%;
 `;

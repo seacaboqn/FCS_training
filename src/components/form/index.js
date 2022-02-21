@@ -3,8 +3,7 @@ import { useForm } from 'react-hook-form';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { RoundAvatar, Title } from './style';
-import Image from 'next/image';
+import { RoundAvatar, Title, Confirm } from './style';
 import { InputAdornment, Typography } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
@@ -47,7 +46,6 @@ const Form = () => {
                             required
                             id="outlined-required"
                             label="Location"
-                            defaultValue="Hello World"
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
@@ -61,7 +59,6 @@ const Form = () => {
                             required
                             id="outlined-required"
                             label="Pax"
-                            defaultValue="Hello World"
                             margin="normal"
                         />
                         <TextField
@@ -155,7 +152,6 @@ const Form = () => {
                             }}
                             margin="normal"
                         />
-                        `
                     </Box>
 
                     {/*/!* register your input into the hook by invoking the "register" function *!/*/}
@@ -170,12 +166,15 @@ const Form = () => {
                     {/*    <span>This field is required</span>*/}
                     {/*)}*/}
 
-                    {/*<Checkbox {...label} />*/}
+                    <Confirm>
+                        <Checkbox {...label} />
 
-                    <Typography>
-                        I have read, agreed and understood the stated terms and
-                        conditions{' '}
-                    </Typography>
+                        <Typography>
+                            I have read, agreed and understood the stated terms
+                            and conditions{' '}
+                        </Typography>
+                    </Confirm>
+
                     <Button variant="contained" type="submit" fullWidth={true}>
                         BOOK
                     </Button>
