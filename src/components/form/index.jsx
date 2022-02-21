@@ -53,13 +53,11 @@ const Form = (props) => {
     } = useForm();
     const onSubmit = (data) => console.log(data);
 
-    console.log(watch('example')); // watch input value by passing the name of it
 
     const ChecboxOnChangeHandler = () => {
         setEnableButton((prev) => {
             return !prev;
         });
-        console.log(enableButton);
     };
 
     return (
@@ -258,7 +256,7 @@ const Form = (props) => {
                                 )
                             }}
                             margin="normal"
-                            {...register('message', { required: true })}
+                            {...register('message')}
                         />
                     </Box>
                     {/* <PhoneInput
