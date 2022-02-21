@@ -14,19 +14,33 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import UnstyledSelectRichOptions from '../UI/customSelectBox'
 
-import PhoneInput from 'react-phone-input-2';
 
 import 'react-phone-input-2/lib/material.css';
 
-import MuiPhoneNumber from 'material-ui-phone-number';
-
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+
+const currencies = [
+    {
+        value: 'USD',
+        label: '$'
+    },
+    {
+        value: 'EUR',
+        label: '€'
+    },
+    {
+        value: 'BTC',
+        label: '฿'
+    },
+    {
+        value: 'JPY',
+        label: '¥'
+    }
+];
 
 const Form = (props) => {
     // const { value, defaultCountry, onChange, classes } = props;
@@ -81,12 +95,22 @@ const Form = (props) => {
                                     )
                                 }}
                                 margin="normal"
+                                select
                                 {...register('location', {
                                     required: 'Location is required'
                                 })}
                                 error={!!errors.location}
                                 helperText={errors?.location?.message}
-                            />
+                            >
+                                {currencies.map((option) => (
+                                    <MenuItem
+                                        key={option.value}
+                                        value={option.value}
+                                    >
+                                        {option.label}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
                             <TextField
                                 id="outlined-required"
                                 label="Pax *"
@@ -98,12 +122,22 @@ const Form = (props) => {
                                     )
                                 }}
                                 margin="normal"
+                                select
                                 {...register('pax', {
                                     required: 'Pax is required'
                                 })}
                                 error={!!errors.pax}
                                 helperText={errors?.pax?.message}
-                            />
+                            >
+                                {currencies.map((option) => (
+                                    <MenuItem
+                                        key={option.value}
+                                        value={option.value}
+                                    >
+                                        {option.label}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
                         </Box>
                         <TextField
                             id="outlined-required"
@@ -201,6 +235,7 @@ const Form = (props) => {
                                 startAdornment: (
                                     <InputAdornment position="start">
                                         <LocalPhoneIcon />
+                                        <UnstyledSelectRichOptions />
                                     </InputAdornment>
                                 )
                             }}
@@ -226,7 +261,7 @@ const Form = (props) => {
                             {...register('message', { required: true })}
                         />
                     </Box>
-                    <PhoneInput
+                    {/* <PhoneInput
                         country={'sg'}
                         inputProps={{
                             name: 'phone',
@@ -234,7 +269,9 @@ const Form = (props) => {
                             autoFocus: true
                         }}
                         {...register('test')}
-                    />
+                    /> */}
+
+                    
                     <Confirm>
                         <Checkbox
                             {...label}
