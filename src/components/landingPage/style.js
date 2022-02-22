@@ -16,7 +16,7 @@ export const LandingPageWrapper = styled(Box)`
     transform: translate(-50%, -50%);
     align-items: center;
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     color: rgba(0, 0, 0, 0.54);
     p {
         font-size: 25px;
@@ -48,6 +48,6 @@ export const Background = styled(Box)`
 `;
 
 export const WrappedContainer = styled(Container)`
-    height: 980px;
+    height: 100vh;
     max-width: 100%;
 `;

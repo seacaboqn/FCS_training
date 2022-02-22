@@ -5,6 +5,7 @@ export const WrappedContainer = styled(Box)`
     background-color: rgb(82, 92, 105);
     color: rgb(204, 204, 204);
     max-width: 100%;
+    height: 100vh;
 `;
 
 export const Content = styled(Box)`
@@ -22,7 +23,7 @@ export const SearchField = styled(Box)`
 
 export const GridContainer = styled(Box)`
     margin: 20px 0px;
-    height: 100vh;
+    height: 75vh;
     overflow: auto;
     background: white;
     padding: 24px;

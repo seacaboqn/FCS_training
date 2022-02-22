@@ -14,8 +14,7 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
-import UnstyledSelectRichOptions from '../UI/customSelectBox'
-
+import UnstyledSelectRichOptions from '../UI/customSelectBox';
 
 import 'react-phone-input-2/lib/material.css';
 
@@ -26,7 +25,7 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 const currencies = [
     {
         value: 'USD',
-        label: '$'
+        label: '258 Ton Dan'
     },
     {
         value: 'EUR',
@@ -53,7 +52,6 @@ const Form = (props) => {
     } = useForm();
     const onSubmit = (data) => console.log(data);
 
-
     const ChecboxOnChangeHandler = () => {
         setEnableButton((prev) => {
             return !prev;
@@ -62,7 +60,7 @@ const Form = (props) => {
 
     return (
         /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
-        <Container maxWidth="lg" style={{ marginTop: '20px' }}>
+        <Container maxWidth="lg" style={{ marginTop: '20px', overflow: 'auto', height: '100vh' }}>
             <Box style={{ textAlign: 'center' }}>
                 <RoundAvatar
                     src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Lionel_Messi_20180626.jpg"
@@ -94,6 +92,7 @@ const Form = (props) => {
                                 }}
                                 margin="normal"
                                 select
+                                defaultValue=""
                                 {...register('location', {
                                     required: 'Location is required'
                                 })}
@@ -121,6 +120,7 @@ const Form = (props) => {
                                 }}
                                 margin="normal"
                                 select
+                                defaultValue=""
                                 {...register('pax', {
                                     required: 'Pax is required'
                                 })}
@@ -225,7 +225,7 @@ const Form = (props) => {
                         />
                         <TextField
                             id="outlined-required"
-                            label="Phone"
+                            label="Phone *"
                             type="number"
                             placeholder="Phone"
                             fullWidth={true}
@@ -269,7 +269,6 @@ const Form = (props) => {
                         {...register('test')}
                     /> */}
 
-                    
                     <Confirm>
                         <Checkbox
                             {...label}

@@ -19,11 +19,7 @@ const LandingPage = () => {
     };
     return (
         <>
-            <WrappedContainer
-                id="section-1"
-                maxWidth={false}
-                style={{ position: 'relative' }}
-            >
+            <WrappedContainer id="section-1" maxWidth={false}>
                 <LandingPageWrapper>
                     <Grettings variant="h2" component="h1">
                         Welcome to{' '}
@@ -55,6 +51,9 @@ const LandingPage = () => {
                             d="M753.1,434.2c110.6,63.7,277.7,70.6,373.4,15.4L1905,0v555.9H0V0.2L753.1,434.2z"
                         ></path>
                     </svg>
+                    {/*<SvgIcon>*/}
+                    {/*    <path fill="#525c69" d="M753.1,434.2c110.6,63.7,277.7,70.6,373.4,15.4L1905,0v555.9H0V0.2L753.1,434.2z" />*/}
+                    {/*</SvgIcon>*/}
                 </Background>
             </WrappedContainer>
         </>
