@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -8,13 +8,17 @@ import { InputAdornment, Typography } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import WatchLaterIcon from '@mui/icons-material/WatchLater';
 import PersonIcon from '@mui/icons-material/Person';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import UnstyledSelectRichOptions from '../UI/customSelectBox';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import WatchLaterIcon from '@mui/icons-material/WatchLater';
 
 import 'react-phone-input-2/lib/material.css';
 
@@ -42,14 +46,25 @@ const currencies = [
 ];
 
 const Form = (props) => {
-    // const { value, defaultCountry, onChange, classes } = props;
+    const [value, setValue] = useState(null);
     const [enableButton, setEnableButton] = useState(false);
     const {
+        control,
         register,
         handleSubmit,
         watch,
         formState: { errors }
     } = useForm();
+
+    const [startDate, setStartDate] = useState();
+    // setHours(setMinutes(new Date(), 0), 9)
+    const filterPassedTime = (time) => {
+        const currentDate = new Date();
+        const selectedDate = new Date(time);
+
+        return currentDate.getTime() < selectedDate.getTime();
+    };
+
     const onSubmit = (data) => console.log(data);
 
     const ChecboxOnChangeHandler = () => {
@@ -60,7 +75,10 @@ const Form = (props) => {
 
     return (
         /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
-        <Container maxWidth="lg" style={{ marginTop: '20px', overflow: 'auto', height: '100vh' }}>
+        <Container
+            maxWidth="lg"
+            style={{ marginTop: '20px', overflow: 'auto', height: '100vh' }}
+        >
             <Box style={{ textAlign: 'center' }}>
                 <RoundAvatar
                     src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Lionel_Messi_20180626.jpg"
@@ -137,25 +155,71 @@ const Form = (props) => {
                                 ))}
                             </TextField>
                         </Box>
-                        <TextField
-                            id="outlined-required"
-                            label="Date Time"
-                            placeholder="Pick your time"
-                            fullWidth={true}
-                            InputProps={{
-                                startAdornment: (
-                                    <InputAdornment position="start">
-                                        <WatchLaterIcon />
-                                    </InputAdornment>
-                                )
-                            }}
-                            margin="normal"
-                            {...register('datetime', {
-                                required:
-                                    'There are no available times! Please select another date'
-                            })}
-                            error={!!errors.datetime}
-                            helperText={errors?.datetime?.message}
+                        {/*<TextField*/}
+                        {/*    id="outlined-required"*/}
+                        {/*    label="Date Time"*/}
+                        {/*    placeholder="Pick your time"*/}
+                        {/*    fullWidth={true}*/}
+                        {/*    InputProps={{*/}
+                        {/*        startAdornment: (*/}
+                        {/*            <InputAdornment position="start">*/}
+                        {/*                <WatchLaterIcon />*/}
+                        {/*                <DatePicker*/}
+                        {/*                    selected={startDate}*/}
+                        {/*                    onChange={(date) =>*/}
+                        {/*                        setStartDate(date)*/}
+                        {/*                    }*/}
+                        {/*                    showTimeSelect*/}
+                        {/*                    filterTime={filterPassedTime}*/}
+                        {/*                    dateFormat="EEEE MMMM d, yyyy h:mm aa"*/}
+                        {/*                />*/}
+                        {/*            </InputAdornment>*/}
+                        {/*        )*/}
+                        {/*    }}*/}
+                        {/*    margin="normal"*/}
+                        {/*    {...register('datetime', {*/}
+                        {/*        required:*/}
+                        {/*            'There are no available times! Please select another date'*/}
+                        {/*    })}*/}
+                        {/*    error={!!errors.datetime}*/}
+                        {/*    helperText={errors?.datetime?.message}*/}
+                        {/* />*/}
+                        <Controller
+                            control={control}
+                            name="date-input"
+                            render={({ field }) => (
+                                <DatePicker
+                                    selected={startDate}
+                                    onChange={(date) => setStartDate(date)}
+                                    showTimeSelect
+                                    filterTime={filterPassedTime}
+                                    dateFormat="EEEE MMMM d, yyyy h:mm aa"
+                                    customInput={
+                                        <TextField
+                                            id="outlined-required"
+                                            label="Date Time *"
+                                            placeholder="Pick your time"
+                                            fullWidth={true}
+                                            InputProps={{
+                                                startAdornment: (
+                                                    <InputAdornment position="start">
+                                                        <WatchLaterIcon />
+                                                    </InputAdornment>
+                                                )
+                                            }}
+                                            margin="normal"
+                                            {...register('datetime', {
+                                                required:
+                                                    'There are no available times! Please select another date'
+                                            })}
+                                            error={!!errors.datetime}
+                                            helperText={
+                                                errors?.datetime?.message
+                                            }
+                                        />
+                                    }
+                                />
+                            )}
                         />
                     </Box>
                     <Box>
