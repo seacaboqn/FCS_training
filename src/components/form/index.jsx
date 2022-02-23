@@ -1,9 +1,14 @@
 import React, { useState, useRef, forwardRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { RoundAvatar, Title, Confirm, Reservation } from './style';
+import {
+    RoundAvatar,
+    Title,
+    Confirm,
+    Reservation,
+    WrappedContainer
+} from './style';
 import { InputAdornment, Typography } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
@@ -14,8 +19,6 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import UnstyledSelectRichOptions from '../UI/customSelectBox';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import WatchLaterIcon from '@mui/icons-material/WatchLater';
@@ -79,11 +82,8 @@ const Form = (props) => {
 
     return (
         /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
-        <Container
-            maxWidth="lg"
-            style={{ marginTop: '20px', overflow: 'auto', height: '90vh' }}
-        >
-            <Box style={{ textAlign: 'center' }}>
+        <WrappedContainer maxWidth="lg">
+            <Box className="avatar-container">
                 <RoundAvatar
                     src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Lionel_Messi_20180626.jpg"
                     alt="Picture of the author"
@@ -318,13 +318,7 @@ const Form = (props) => {
                             onChange={ChecboxOnChangeHandler}
                         />
 
-                        <Typography
-                            style={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                justifyContent: 'center'
-                            }}
-                        >
+                        <Typography>
                             I have read, agreed and understood the stated terms
                             and conditions{' '}
                         </Typography>
@@ -339,7 +333,7 @@ const Form = (props) => {
                     </Button>
                 </form>
             </Box>
-        </Container>
+        </WrappedContainer>
     );
 };
 

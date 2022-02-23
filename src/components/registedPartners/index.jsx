@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { WrappedContainer, Content, SearchField, GridContainer } from './style';
+import {
+    WrappedContainer,
+    Content,
+    SearchField,
+    GridContainer,
+    GoUpLink,
+    Item
+} from './style';
 import { Container, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import SvgIcon from '@mui/material/SvgIcon';
 import { InputBase } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import Paper from '@mui/material/Paper';
-import { experimentalStyled as styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea } from '@mui/material';
 import Link from 'next/link';
-import Input from '@mui/material/Input';
 
 const dummyData = [
     {
@@ -97,33 +101,29 @@ const RegisteredPartners = () => {
     const [searchResult, setSearchResult] = useState(dummyData);
 
     useEffect(() => {
-        setSearchResult(
-            dummyData.filter((item) => {
-                return item.name
-                    .toLowerCase()
-                    .includes(inputSearch.toLowerCase());
-            })
-        );
+        const identify = setTimeout(() => {
+            setSearchResult(
+                dummyData.filter((item) => {
+                    return item.name
+                        .toLowerCase()
+                        .includes(inputSearch.toLowerCase());
+                })
+            );
+        }, 500);
+        return () => {
+            clearTimeout(identify);
+        };
     }, [inputSearch]);
-    const Item = styled(Paper)(({ theme }) => ({
-        textAlign: 'center'
-    }));
     return (
         <WrappedContainer maxWidth={false} id="section-2">
             <Container>
-                <Box
-                    style={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        width: '100%'
-                    }}
-                >
+                <GoUpLink>
                     <Typography component="a" href="/#section-1">
-                        <SvgIcon>
+                        <SvgIcon fontSize={'large'}>
                             <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
                         </SvgIcon>
                     </Typography>
-                </Box>
+                </GoUpLink>
                 <Content>
                     <Typography component="h1" variant="h4">
                         EPOS Restaurant Booking
@@ -131,21 +131,8 @@ const RegisteredPartners = () => {
                     <Box style={{ width: '100%' }}>
                         <SearchField>
                             <InputBase
-                                startAdornment={
-                                    <SearchIcon
-                                        style={{
-                                            margin: '0px 10px',
-                                            height: '40px',
-                                            width: '40px'
-                                        }}
-                                    />
-                                }
+                                startAdornment={<SearchIcon />}
                                 placeholder="Search..."
-                                style={{
-                                    width: '100%',
-                                    padding: '8px 8px 8px 0px',
-                                    fontSize: '1.5rem'
-                                }}
                                 onChange={(e) => {
                                     setInputSearch(e.target.value);
                                 }}
@@ -168,11 +155,7 @@ const RegisteredPartners = () => {
                                     >
                                         <Link href="/form" passHref>
                                             <Item>
-                                                <Card
-                                                    style={{
-                                                        borderRadius: '4px'
-                                                    }}
-                                                >
+                                                <Card>
                                                     <CardActionArea>
                                                         <CardMedia
                                                             component="img"

@@ -18,9 +18,11 @@ export const LandingPageWrapper = styled(Box)`
     width: 100vw;
     height: 100%;
     color: rgba(0, 0, 0, 0.54);
+
     p {
         font-size: 25px;
     }
+
     & .greeting {
         font-weight: bold;
 
@@ -28,10 +30,16 @@ export const LandingPageWrapper = styled(Box)`
             line-height: 1.2;
         }
     }
-    &. description {
+
+    & .description {
         margin-top: 10px;
         margin-bottom: 10px;
     }
+
+    & button {
+        width: 350px;
+    }
+
     text-align: center;
     z-index: 1000;
 `;
