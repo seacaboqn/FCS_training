@@ -13,6 +13,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea } from '@mui/material';
 import Link from 'next/link';
+import Input from '@mui/material/Input';
 
 const dummyData = [
     {
@@ -132,11 +133,19 @@ const RegisteredPartners = () => {
                             <InputBase
                                 startAdornment={
                                     <SearchIcon
-                                        style={{ margin: '0px 10px' }}
+                                        style={{
+                                            margin: '0px 10px',
+                                            height: '40px',
+                                            width: '40px'
+                                        }}
                                     />
                                 }
                                 placeholder="Search..."
-                                style={{ width: '100%' }}
+                                style={{
+                                    width: '100%',
+                                    padding: '8px 8px 8px 0px',
+                                    fontSize: '1.5rem'
+                                }}
                                 onChange={(e) => {
                                     setInputSearch(e.target.value);
                                 }}

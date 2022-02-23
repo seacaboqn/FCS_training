@@ -19,6 +19,9 @@ export const SearchField = styled(Box)`
     border-radius: 4px;
     background-color: rgba(255, 255, 255, 0.15);
     margin-top: 20px;
+    .MuiInputBase-root {
+        color: inherit;
+    }
 `;
 
 export const GridContainer = styled(Box)`
@@ -27,4 +30,5 @@ export const GridContainer = styled(Box)`
     overflow: auto;
     background: white;
     padding: 24px;
+    border-radius: 4px;
 `;
