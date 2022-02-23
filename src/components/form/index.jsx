@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, forwardRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { RoundAvatar, Title, Confirm } from './style';
+import { RoundAvatar, Title, Confirm, Reservation } from './style';
 import { InputAdornment, Typography } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
@@ -48,6 +48,9 @@ const currencies = [
 const Form = (props) => {
     const [value, setValue] = useState(null);
     const [enableButton, setEnableButton] = useState(false);
+    const [startDate, setStartDate] = useState();
+    const [inputTime, setInputTime] = useState('test');
+    const inputRef = useRef(null);
     const {
         control,
         register,
@@ -56,7 +59,6 @@ const Form = (props) => {
         formState: { errors }
     } = useForm();
 
-    const [startDate, setStartDate] = useState();
     // setHours(setMinutes(new Date(), 0), 9)
     const filterPassedTime = (time) => {
         const currentDate = new Date();
@@ -73,11 +75,13 @@ const Form = (props) => {
         });
     };
 
+    const [date, setDate] = useState();
+
     return (
         /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
         <Container
             maxWidth="lg"
-            style={{ marginTop: '20px', overflow: 'auto', height: '100vh' }}
+            style={{ marginTop: '20px', overflow: 'auto', height: '90vh' }}
         >
             <Box style={{ textAlign: 'center' }}>
                 <RoundAvatar
@@ -89,7 +93,7 @@ const Form = (props) => {
             </Box>
             <Box>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <Box>
+                    <Reservation>
                         <Title>1. Reservation</Title>
                         <Box
                             sx={{
@@ -155,51 +159,35 @@ const Form = (props) => {
                                 ))}
                             </TextField>
                         </Box>
-                        {/*<TextField*/}
-                        {/*    id="outlined-required"*/}
-                        {/*    label="Date Time"*/}
-                        {/*    placeholder="Pick your time"*/}
-                        {/*    fullWidth={true}*/}
-                        {/*    InputProps={{*/}
-                        {/*        startAdornment: (*/}
-                        {/*            <InputAdornment position="start">*/}
-                        {/*                <WatchLaterIcon />*/}
-                        {/*                <DatePicker*/}
-                        {/*                    selected={startDate}*/}
-                        {/*                    onChange={(date) =>*/}
-                        {/*                        setStartDate(date)*/}
-                        {/*                    }*/}
-                        {/*                    showTimeSelect*/}
-                        {/*                    filterTime={filterPassedTime}*/}
-                        {/*                    dateFormat="EEEE MMMM d, yyyy h:mm aa"*/}
-                        {/*                />*/}
-                        {/*            </InputAdornment>*/}
-                        {/*        )*/}
-                        {/*    }}*/}
-                        {/*    margin="normal"*/}
-                        {/*    {...register('datetime', {*/}
-                        {/*        required:*/}
-                        {/*            'There are no available times! Please select another date'*/}
-                        {/*    })}*/}
-                        {/*    error={!!errors.datetime}*/}
-                        {/*    helperText={errors?.datetime?.message}*/}
-                        {/* />*/}
+
                         <Controller
                             control={control}
-                            name="date-input"
-                            render={({ field }) => (
+                            rules={{
+                                required:
+                                    'There are no available times! Please select another date'
+                            }}
+                            name="datetime"
+                            render={({
+                                field: { onChange, onBlur, name, value, ref }
+                            }) => (
                                 <DatePicker
-                                    selected={startDate}
-                                    onChange={(date) => setStartDate(date)}
+                                    name={name}
+                                    autoComplete="off"
+                                    onChange={onChange}
+                                    // onBlur={onBlur}
+                                    selected={value}
                                     showTimeSelect
                                     filterTime={filterPassedTime}
                                     dateFormat="EEEE MMMM d, yyyy h:mm aa"
+                                    placeholderText="Pick your time"
                                     customInput={
                                         <TextField
                                             id="outlined-required"
                                             label="Date Time *"
-                                            placeholder="Pick your time"
+                                            // focus erros
+                                            // inputRef={ref}
                                             fullWidth={true}
+                                            value={startDate}
                                             InputProps={{
                                                 startAdornment: (
                                                     <InputAdornment position="start">
@@ -208,10 +196,6 @@ const Form = (props) => {
                                                 )
                                             }}
                                             margin="normal"
-                                            {...register('datetime', {
-                                                required:
-                                                    'There are no available times! Please select another date'
-                                            })}
                                             error={!!errors.datetime}
                                             helperText={
                                                 errors?.datetime?.message
@@ -221,7 +205,7 @@ const Form = (props) => {
                                 />
                             )}
                         />
-                    </Box>
+                    </Reservation>
                     <Box>
                         <Title>2. Infomation</Title>
                         <Box
@@ -323,15 +307,6 @@ const Form = (props) => {
                             {...register('message')}
                         />
                     </Box>
-                    {/* <PhoneInput
-                        country={'sg'}
-                        inputProps={{
-                            name: 'phone',
-                            required: true,
-                            autoFocus: true
-                        }}
-                        {...register('test')}
-                    /> */}
 
                     <Confirm>
                         <Checkbox

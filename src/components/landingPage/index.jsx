@@ -21,14 +21,14 @@ const LandingPage = () => {
         <>
             <WrappedContainer id="section-1" maxWidth={false}>
                 <LandingPageWrapper>
-                    <Grettings variant="h2" component="h1">
+                    <Typography variant="h2" component="h1" className='greeting'>
                         Welcome to{' '}
                         <ServiceName>EPOS Booking Service</ServiceName>
-                    </Grettings>
-                    <Description variant="h5" component="h5">
+                    </Typography>
+                    <Typography variant="h5" component="h5" className='description'>
                         {' '}
                         The online booking assistant to fill your schedule
-                    </Description>
+                    </Typography>
                     <Button
                         variant="contained"
                         style={{ width: '350px' }}

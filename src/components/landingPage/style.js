@@ -21,6 +21,17 @@ export const LandingPageWrapper = styled(Box)`
     p {
         font-size: 25px;
     }
+    & .greeting {
+        font-weight: bold;
+
+        h2 {
+            line-height: 1.2;
+        }
+    }
+    &. description {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
     text-align: center;
     z-index: 1000;
 `;
