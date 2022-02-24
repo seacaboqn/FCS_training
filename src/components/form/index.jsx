@@ -22,6 +22,7 @@ import UnstyledSelectRichOptions from '../UI/customSelectBox';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import WatchLaterIcon from '@mui/icons-material/WatchLater';
+import { countries } from '../../../data/countries';
 
 import 'react-phone-input-2/lib/material.css';
 
@@ -49,7 +50,7 @@ const currencies = [
 ];
 
 const Form = (props) => {
-    const [value, setValue] = useState(null);
+    const [value, setValue] = useState(65);
     const [enableButton, setEnableButton] = useState(false);
     const [startDate, setStartDate] = useState();
     const [inputTime, setInputTime] = useState('test');
@@ -70,7 +71,10 @@ const Form = (props) => {
         return currentDate.getTime() < selectedDate.getTime();
     };
 
-    const onSubmit = (data) => console.log(data);
+    const onSubmit = (data) => {
+        data.phone = value + data.phone;
+        console.log(data);
+    };
 
     const ChecboxOnChangeHandler = () => {
         setEnableButton((prev) => {
@@ -285,7 +289,11 @@ const Form = (props) => {
                                 startAdornment: (
                                     <InputAdornment position="start">
                                         <LocalPhoneIcon />
-                                        <UnstyledSelectRichOptions />
+                                        <UnstyledSelectRichOptions
+                                            parentCallback={(child) =>
+                                                setValue(child)
+                                            }
+                                        />
                                     </InputAdornment>
                                 )
                             }}
